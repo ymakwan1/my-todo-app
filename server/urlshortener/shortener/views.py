@@ -19,8 +19,11 @@ def shorten_url(request):
             url_object = URL.objects.get(original_url=original_url)
             short_code = url_object.short_code
         except URL.DoesNotExist:
-            short_code = generate_short_code()
-            URL.objects.create(original_url=original_url, short_code=short_code)
+            try:
+                short_code = generate_short_code()
+                URL.objects.create(original_url=original_url, short_code=short_code)
+            except Exception as e:
+                return JsonResponse({'error': str(e)}, status=500)
 
         return JsonResponse({'short_code': short_code})
 
@@ -32,11 +35,16 @@ def redirect_url(request, short_code):
         return HttpResponseRedirect(url.original_url)
     except URL.DoesNotExist:
         return JsonResponse({'error': 'URL not found'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
 
 def get_all_urls(request):
-    urls = URL.objects.all().order_by('-created_at')
-    data = [{'short_code': url.short_code, 'original_url': url.original_url, 'created_at': url.created_at} for url in urls]
-    return JsonResponse(data, safe=False)
+    try:
+        urls = URL.objects.all().order_by('-created_at')
+        data = [{'short_code': url.short_code, 'original_url': url.original_url, 'created_at': url.created_at} for url in urls]
+        return JsonResponse(data, safe=False)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
 
 def get_url_details(request, short_code):
     try:
@@ -45,3 +53,12 @@ def get_url_details(request, short_code):
         return JsonResponse(data)
     except URL.DoesNotExist:
         return JsonResponse({'error': 'URL not found'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+    
+def get_analytics(request):
+    try:
+        url_count = URL.objects.count()
+        return JsonResponse({'url_count': url_count})
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
