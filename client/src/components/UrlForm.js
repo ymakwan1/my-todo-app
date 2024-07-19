@@ -36,7 +36,7 @@ const UrlForm = () => {
         </div>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         {shortCode && (
-          <p className="shortened-url">Shortened URL: http://localhost:8000/{shortCode}</p>
+          <p className="shortened-url">Shortened URL: https://18.224.74.238:8000/api/{shortCode}</p>
         )}
         <button type="submit" className="btn">
           Shorten
