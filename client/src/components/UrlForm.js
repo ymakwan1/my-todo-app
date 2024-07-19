@@ -16,7 +16,7 @@ const UrlForm = () => {
         { url },
         {
           headers: {
-            'Content-Type': 'application/json' // Set the content type header
+            'Content-Type': 'application/json'
           }
         }
       );
@@ -46,7 +46,7 @@ const UrlForm = () => {
         </div>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         {shortCode && (
-          <p className="shortened-url">Shortened URL: http://localhost:8000/{shortCode}</p>
+          <p className="shortened-url">Shortened, visit All URLs for redirection</p>
         )}
         <button type="submit" className="btn">
           Shorten
