@@ -34,7 +34,6 @@ const UrlList = () => {
           <tr>
             <th>Short Code</th>
             <th>Original URL</th>
-            <th>Created At</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -43,7 +42,6 @@ const UrlList = () => {
             <tr key={url.short_code}>
               <td>{url.short_code}</td>
               <td>{url.original_url}</td>
-              <td>{url.created_at}</td>
               <td>
                 <button onClick={() => redirectToUrl(url.short_code)}>Redirect</button>
               </td>
