@@ -11,7 +11,7 @@ const Analytics = () => {
 
   const fetchAnalytics = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/analytics');
+      const response = await axios.get('http://18.224.74.238:8000/api/analytics');
       console.log('Analytics data:', response.data);
       setUrlCount(response.data.url_count);
     } catch (error) {
