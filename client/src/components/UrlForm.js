@@ -11,7 +11,7 @@ const UrlForm = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post('http://18.224.74.238:8000/api/shorten/', { url });
+      const response = await axios.post('https://18.224.74.238:8000/api/shorten/', { url });
       setShortCode(response.data.short_code);
     } catch (error) {
       console.error('Error shortening URL:', error);
