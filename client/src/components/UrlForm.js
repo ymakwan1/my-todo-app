@@ -22,6 +22,11 @@ const UrlForm = () => {
       );
       setShortCode(response.data.short_code);
       setErrorMessage('');
+      setTimeout(() => {
+        setUrl('');
+        setShortCode('');
+        setErrorMessage('');
+      }, 5000);
     } catch (error) {
       console.error('Error shortening URL:', error);
       setErrorMessage('Failed to shorten URL');
