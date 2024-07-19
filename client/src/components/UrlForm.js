@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './UrlForm.css'; // Import your CSS file
+import './UrlForm.css';
 
 const UrlForm = () => {
   const [url, setUrl] = useState('');
@@ -11,11 +11,21 @@ const UrlForm = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post('http://18.224.74.238:8000/api/shorten/', { url });
+      const response = await axios.post(
+        'http://18.224.74.238:8000/api/shorten/',
+        { url },
+        {
+          headers: {
+            'Content-Type': 'application/json' // Set the content type header
+          }
+        }
+      );
       setShortCode(response.data.short_code);
+      setErrorMessage('');
     } catch (error) {
       console.error('Error shortening URL:', error);
       setErrorMessage('Failed to shorten URL');
+      setShortCode('');
     }
   };
 

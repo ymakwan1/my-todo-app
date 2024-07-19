@@ -2,7 +2,7 @@ from django.http import JsonResponse, HttpResponseRedirect, HttpResponseBadReque
 from django.views.decorators.csrf import csrf_exempt
 from .models import URL
 import string
-import random
+import random, json
 
 def generate_short_code(length=8):
     characters = string.ascii_letters + string.digits
@@ -11,7 +11,8 @@ def generate_short_code(length=8):
 @csrf_exempt
 def shorten_url(request):
     if request.method == 'POST':
-        original_url = request.POST.get('url')
+        data = json.loads(request.body)
+        original_url = data.get('url')
         if not original_url:
             return HttpResponseBadRequest('Invalid URL')
 
