@@ -11,7 +11,7 @@ const UrlList = () => {
 
   const fetchAllUrls = async () => {
     try {
-      const response = await axios.get('https://18.224.74.238:8000/api/urls/');
+      const response = await axios.get('http://18.224.74.238:8000/api/urls/');
       setUrls(response.data);
     } catch (error) {
       console.error('Error fetching URLs:', error);
@@ -20,7 +20,7 @@ const UrlList = () => {
 
   const redirectToUrl = (shortCode) => {
     if (typeof window !== 'undefined') {
-      window.open(`https://18.224.74.238:8000/api/${shortCode}`, '_blank');
+      window.open(`http://18.224.74.238:8000/api/${shortCode}`, '_blank');
     } else {
       console.error('Window object is not available');
     }

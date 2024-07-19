@@ -11,7 +11,7 @@ const UrlForm = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post('https://18.224.74.238:8000/api/shorten/', { url });
+      const response = await axios.post('http://18.224.74.238:8000/api/shorten/', { url });
       setShortCode(response.data.short_code);
     } catch (error) {
       console.error('Error shortening URL:', error);
@@ -36,7 +36,7 @@ const UrlForm = () => {
         </div>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         {shortCode && (
-          <p className="shortened-url">Shortened URL: https://18.224.74.238:8000/api/{shortCode}</p>
+          <p className="shortened-url">Shortened URL: http://localhost:8000/{shortCode}</p>
         )}
         <button type="submit" className="btn">
           Shorten
